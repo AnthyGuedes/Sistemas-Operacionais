@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Estrutura de dados para passar informações às threads
+// estrutura de dados para passar informações às threads
 typedef struct {
     int **A;
     int **B;
@@ -15,7 +15,7 @@ typedef struct {
     int colunas;
 } DadosThread;
 
-// Função que será executada por cada thread
+// função executada por cada thread
 void *soma_matrizes(void *arg) {
     DadosThread *dados = (DadosThread *) arg;
 
@@ -28,7 +28,7 @@ void *soma_matrizes(void *arg) {
     pthread_exit(NULL);
 }
 
-// Função para alocar matriz dinamicamente
+//  alocar matriz dinamicamente
 int **alocar_matriz(int linhas, int colunas) {
     int **matriz = malloc(linhas * sizeof(int *));
     for (int i = 0; i < linhas; i++) {
@@ -37,7 +37,7 @@ int **alocar_matriz(int linhas, int colunas) {
     return matriz;
 }
 
-// Função para liberar memória de matriz
+// liberar memória de matriz
 void liberar_matriz(int **matriz, int linhas) {
     for (int i = 0; i < linhas; i++) {
         free(matriz[i]);
@@ -45,7 +45,7 @@ void liberar_matriz(int **matriz, int linhas) {
     free(matriz);
 }
 
-// Função para preencher matriz com valores digitados pelo usuário
+// preencher matriz com valores digitados pelo usuário
 void preencher_matriz(int **matriz, int linhas, int colunas, const char *nome) {
     printf("Digite os elementos da matriz %s:\n", nome);
     for (int i = 0; i < linhas; i++) {
@@ -56,7 +56,7 @@ void preencher_matriz(int **matriz, int linhas, int colunas, const char *nome) {
     }
 }
 
-// Função para imprimir matriz
+// exibir matriz
 void imprimir_matriz(const char *nome, int **matriz, int linhas, int colunas) {
     printf("Matriz %s:\n", nome);
     for (int i = 0; i < linhas; i++) {
@@ -71,7 +71,7 @@ void imprimir_matriz(const char *nome, int **matriz, int linhas, int colunas) {
 int main() {
     int linhas, colunas, num_threads;
 
-    // Leitura das dimensões e número de threads
+    
     printf("Informe o número de linhas: ");
     scanf("%d", &linhas);
 
@@ -81,16 +81,16 @@ int main() {
     printf("Informe o número de threads: ");
     scanf("%d", &num_threads);
 
-    // Alocação das matrizes
+    
     int **A = alocar_matriz(linhas, colunas);
     int **B = alocar_matriz(linhas, colunas);
     int **C = alocar_matriz(linhas, colunas);
 
-    // Preenchimento das matrizes A e B
+    
     preencher_matriz(A, linhas, colunas, "A");
     preencher_matriz(B, linhas, colunas, "B");
 
-    // Criação das threads
+    // criação das threads
     pthread_t threads[num_threads];
     DadosThread dados[num_threads];
 
@@ -110,17 +110,17 @@ int main() {
         linha_atual = dados[i].linha_fim;
     }
 
-    // Espera pelo término de todas as threads
+    // espera o término de todas as threads
     for (int i = 0; i < num_threads; i++) {
         pthread_join(threads[i], NULL);
     }
 
-    // Impressão do resultado
+    
     imprimir_matriz("A", A, linhas, colunas);
     imprimir_matriz("B", B, linhas, colunas);
     imprimir_matriz("C (A + B)", C, linhas, colunas);
 
-    // Liberação da memória
+    // liberação da memória
     liberar_matriz(A, linhas);
     liberar_matriz(B, linhas);
     liberar_matriz(C, linhas);
