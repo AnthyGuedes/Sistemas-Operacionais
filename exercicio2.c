@@ -1,3 +1,6 @@
+// Anthony e Matheus, testes foram feitos numa maquina virtual ubunto pelo cmd
+//2 – Desenvolva um algoritmo multithreading para fazer a multiplicação de uma matriz NxN por um vetor de tamanho N.
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
