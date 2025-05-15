@@ -1,4 +1,4 @@
-// Anthony e Matheus, testes foram feitos numa maquina virtual ubunto pelo cmd
+// Anthony e Matheus, teste feito em uma maquina virtual ubunto pelo cmd
 // 1 – Desenvolva um algoritmo multithreading para efetuar a soma de duas matrizes de ordem NxM.   
 
 #include <pthread.h>
